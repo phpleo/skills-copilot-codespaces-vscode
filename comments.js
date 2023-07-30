@@ -1,22 +1,13 @@
 // create web server
-// 2019-07-30    PV
+// start web server
+// open in browser
 
-const express = require('express');
-const router = express.Router();
-const Comment = require('../models/comment');
-const Post = require('../models/post');
+// 1. load http module
+var http = require('http');
 
-// get all comments
-router.get('/', async (req, res) => {
-    try {
-        const comments = await Comment.find();
-        res.json(comments);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-})
-
-// get one comment
-router.get('/:id', getComment, (req, res) => {
-    res.json(res.comment);
-})
+// 2. create web server
+var server = http.createServer(function(req, res){
+    console.log('request was made: ' + req.url);
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hey ninjas');
+});
